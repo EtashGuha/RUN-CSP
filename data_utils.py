@@ -99,6 +99,7 @@ def write_dimacs_cnf(f, path):
 def load_formulas(path, weighted=False):
     """ Loads cnf formulas from all .cnf files found under the pattern 'path' """
     paths = glob.glob(os.path.join(path, f'**/*.{"wcnf" if weighted else "cnf"}'), recursive=True)
+    print
     formulas = [load_dimacs_cnf(p, weighted) for p in tqdm(paths)]
     names = [os.path.basename(p) for p in paths]
     return names, formulas
