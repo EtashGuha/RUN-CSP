@@ -1,4 +1,4 @@
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 import numpy as np
 import json
 import os
@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 from csp_utils import Constraint_Language, CSP_Instance, max_2sat_language, is_language
 
-tf.disable_eager_execution()
+tf.compat.v1.disable_eager_execution()
 class Message_Network:
     """ Message Network that sends messages between variables """
 
