@@ -54,8 +54,8 @@ def main():
     
     answers_for_is = evaluate_boosted(network, instances, args.t_max, attempts=args.attempts)
     size_of_graphs = np.array([len(graph.nodes()) for graph in graphs])
-
+    print(size_of_graphs)
     print(size_of_graphs - answers_for_is)
-    
+
 if __name__ == '__main__':
     main()
