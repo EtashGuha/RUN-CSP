@@ -36,7 +36,7 @@ def evaluate_boosted(network, eval_instances, t_max, attempts=64):
     mean_conflict_ratio = np.mean(conflict_ratios)
     mean_is_size = np.mean(is_sizes)
     print(f'Mean ratio of induced edges: {mean_conflict_ratio}, Mean Corrected Independent Set size: {mean_is_size}')
-
+    return is_sizes
 
 def main():
     parser = argparse.ArgumentParser()
@@ -52,7 +52,10 @@ def main():
     names, graphs = data_utils.load_graphs(args.data_path)
     instances = [CSP_Instance.graph_to_csp_instance(g, is_language, 'NAND') for n, g in zip(names, graphs)]
     
-    evaluate_boosted(network, instances, args.t_max, attempts=args.attempts)
+    answers_for_is = evaluate_boosted(network, instances, args.t_max, attempts=args.attempts)
+    size_of_graphs = np.array([len(graph.nodes()) for graph in graphs])
+
+    print(size_of_graphs - answers_for_is)
     
 if __name__ == '__main__':
     main()
